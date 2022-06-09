@@ -1,0 +1,40 @@
+.Home {
+    max-width: 100%;
+    background-color: lightcyan;
+    border-radius: 5px;
+    text-align: center;
+    padding: 90px;
+}
+
+h2 {
+    margin-bottom: 30px;
+}
+
+.tic-tac-toe-board {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    height: 650px;
+    width: 650px;
+    margin: auto auto 50px;
+    gap: 10px;
+}
+
+.section {
+    flex: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 4px solid black;
+    cursor: pointer;
+    height: 33%;
+}
+
+.game-over-message {
+    font-size: 1.5rem;
+}
+
+.x-and-o {
+    font-size: 3rem;
+}

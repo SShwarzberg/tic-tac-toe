@@ -1,0 +1,42 @@
+[
+    {
+        "sections": [
+            {
+                "id": 0,
+                "section-name": "top-left"
+            },
+            {
+                "id": 1,
+                "section-name": "top-center"
+            },
+            {
+                "id": 2,
+                "section-name": "top-right"
+            },
+            {
+                "id": 3,
+                "section-name": "middle-left"
+            },
+            {
+                "id": 4,
+                "section-name": "middle-center"
+            },
+            {
+                "id": 5,
+                "section-name": "middle-right"
+            },
+            {
+                "id": 6,
+                "section-name": "bottom-left"
+            },
+            {
+                "id": 7,
+                "section-name": "bottom-center"
+            },
+            {
+                "id": 8,
+                "section-name": "bottom-right"
+            }
+        ]
+    }
+]
