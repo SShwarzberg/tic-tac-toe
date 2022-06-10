@@ -11,57 +11,74 @@ const Home = () => {
     let playerTwoArray = []
     let clickedSections = []
     const winningCombos = [
-        { value: 123 },
-        { value: 456 },
-        { value: 789 },
-        { value: 147 },
-        { value: 258 },
-        { value: 369 },
-        { value: 159 },
-        { value: 357 }
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+        [1, 4, 7],
+        [2, 5, 8],
+        [3, 6, 9],
+        [1, 5, 9],
+        [3, 5, 7]
     ]
 
+    const checkIfWon = (playerOnePicks, playerPiece) => {
+        winningCombos.map(items => {
+            let containsAll
+            containsAll = items.every(element => {
+                return playerOnePicks.includes(element)
+            })
+            if (containsAll === true) {
+                setGameOver(`Game Over! ${playerPiece} Wins!`)
+            }
+        })
+    }
+
+    const setFinalArray = (playerOnePicks, section) => {
+        clickedSections.push({
+            "id": section.id,
+            "value": playerOne
+        })
+        playerOneArray.push({
+            "id": section.id + 1,
+            "value": playerOne
+        })
+        playerOneArray.map(item => {
+            const playerOnePick = item.id
+            playerOnePicks.push(playerOnePick)
+        })
+    }
+
+    const setFinalArrayX = (section, playerTwoPicks) => {
+        clickedSections.push({
+            "id": section.id,
+            "value": playerTwo
+        })
+        playerTwoArray.push({
+            "id": section.id + 1,
+            "value": playerTwo
+        })
+        playerTwoArray.map(item => {
+            const playerTwoPick = item.id
+            playerTwoPicks.push(playerTwoPick)
+        })
+    }
 
     const trackClicked = (e, section) => {
         let playerOnePicks = []
         let playerTwoPicks = []
+        let playerPiece
         e.target.disabled = true
         e.target.style.cursor = 'default'
         if (clickedSections.length % 2 === 0) {
-            clickedSections.push({
-                "id": section.id,
-                "value": playerOne
-            })
-            playerOneArray.push({
-                "id": section.id + 1,
-                "value": playerOne
-            })
-            playerOneArray.map(item => {
-                const playerOnePick = item.id
-                playerOnePicks.push(playerOnePick)
-            })
-            if (winningCombos.includes(parseInt(playerOnePicks.sort().join().replaceAll(',', '')))) {
-                setGameOver('Player One wins!')
-            }
-            e.target.firstChild.textContent = 'O'
+            playerPiece = 'O'
+            e.target.firstChild.textContent = playerPiece
+            setFinalArray(playerOnePicks, section)
+            checkIfWon(playerOnePicks, playerPiece)
         } else if (clickedSections[clickedSections.length - 1]) {
-            clickedSections.push({
-                "id": section.id,
-                "value": playerTwo
-            })
-            playerTwoArray.push({
-                "id": section.id + 1,
-                "value": playerTwo
-            })
-            playerTwoArray.map(item => {
-                const playerTwoPick = item.id
-                playerTwoPicks.push(playerTwoPick)
-            })
-            e.target.firstChild.textContent = 'X'
-            if (winningCombos.includes(parseInt(playerTwoPicks.sort().join().replaceAll(',', '')))) {
-                setGameOver('Player Two wins!')
-            }
-            console.log(parseInt(playerTwoPicks.sort().join().replaceAll(',', '')).contains('1'));
+            playerPiece = 'X'
+            e.target.firstChild.textContent = playerPiece
+            setFinalArrayX(section, playerTwoPicks)
+            checkIfWon(playerTwoPicks, playerPiece)
         }
     }
 
@@ -77,7 +94,7 @@ const Home = () => {
                     </button>
                 ))}
             </div>
-            {
+            {gameOver &&
                 <div className='game-over-message'>{gameOver}</div>}
         </div >
     );
